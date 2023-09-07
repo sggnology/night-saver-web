@@ -1,7 +1,3 @@
-
-// navigator.serviceWorker.ready.then(reg => {
-//
-// })
 self.addEventListener("install", function (e) {
   console.log("fcm sw install..");
   // self.skipWaiting();

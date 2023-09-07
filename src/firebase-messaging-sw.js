@@ -1,8 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -32,24 +30,26 @@ async function requestPermission() {
   console.log("권한 허용됨");
 
   try{
-    await getToken(messaging, {
-      vapidKey: process.env.REACT_APP_VAPID_KEY,
-    });
+    await getTokenAndSave();
   }
   catch (e){
     setTimeout(async () => {
-      const token = await getToken(messaging, {
-        vapidKey: process.env.REACT_APP_VAPID_KEY,
-      });
-
-      if(token) console.log("토큰: ", token);
-      else console.log("토큰 없음");
+      await getTokenAndSave();
     }, 1000);
   }
 
   onMessage(messaging, (payload) => {
     console.log("메시지 받음", payload);
   });
+}
+
+async function getTokenAndSave() {
+  const token = await getToken(messaging, {
+    vapidKey: process.env.REACT_APP_VAPID_KEY,
+  });
+
+  if(token) console.log("토큰: ", token);
+  else console.log("토큰 없음");
 }
 
 requestPermission();
