@@ -1,0 +1,4 @@
+docker build -t night-saver-web
+docker tag night-saver-web sggnology/night-saver-web
+docker login
+docker push
