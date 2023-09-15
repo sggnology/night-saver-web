@@ -4,7 +4,7 @@ function Header(props) {
   return (
     <>
       <Link to="/">
-        <h1>헤더입니다.</h1>
+        <h1>Night Saver</h1>
       </Link>
     </>
   )
