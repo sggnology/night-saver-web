@@ -1,7 +1,9 @@
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {getMessaging, getToken} from "firebase/messaging";
 import {initializeApp} from "firebase/app";
+import Loading from "../../util/loading/Loading";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCHeIKYOoBwRWg8-TK-U7cK-zRX90DG05A",
@@ -18,16 +20,21 @@ function NightSaver(props) {
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
 
-    const [tokenIssueLoading, setTokenIssueLoading] = useState(true);
+    const [tokenIssueLoading, setTokenIssueLoading] = useState(false);
+
+    useEffect(() => {
+        console.log("tokenIssueLoading 값이 변경되었습니다. : ", tokenIssueLoading);
+    }, [tokenIssueLoading]);
 
     const issueToken = async () => {
 
         try {
+            setTokenIssueLoading(true);
             await requestAlertPermission();
             const token = await requestToken();
             await saveToken(token);
-            setTokenIssueLoading(false);
         } catch (e) {
+            setTokenIssueLoading(false);
             console.error("토큰 발행 과정에서 오류가 발생하였습니다.");
             alert("토큰 발행을 실패하였습니다. 다시 시도하여주세요.");
         }
@@ -87,6 +94,7 @@ function NightSaver(props) {
 
         try{
             await axios.post(url, body);
+            setTokenIssueLoading(false);
             console.log("토큰을 저장하였습니다.");
             alert("토큰이 발행되어 서비스를 사용하실 수 있습니다.");
         }
@@ -99,6 +107,10 @@ function NightSaver(props) {
     return (
         <>
             <p>토큰 발행시 알림을 허용해주셔야 동작합니다.</p>
+
+            <div>
+                <Loading isLoading={tokenIssueLoading}/>
+            </div>
 
             <button onClick={issueToken}>
                 토큰 발행

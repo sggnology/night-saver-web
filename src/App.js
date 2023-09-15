@@ -1,5 +1,4 @@
 import './App.css';
-// import './firebase-messaging-sw.js'
 import Header from "./page/layout/Header";
 import {Route, Routes} from "react-router-dom";
 import NotFound from "./page/exception/NotFound";
