@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {getMessaging, getToken} from "firebase/messaging";
 import {initializeApp} from "firebase/app";
 import Loading from "../../util/loading/Loading";
+import environmentProperty from "../../util/environmentProperty";
 
 
 const firebaseConfig = {
@@ -87,7 +88,7 @@ function NightSaver(props) {
 
     const saveToken = async (token) => {
 
-        const url = "http://localhost:8080/api/v1/token";
+        const url = `${environmentProperty.API_URL}/api/v1/token`;
         const body = {
             token: token
         };
