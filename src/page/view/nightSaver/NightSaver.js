@@ -1,9 +1,10 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {getMessaging, getToken} from "firebase/messaging";
 import {initializeApp} from "firebase/app";
 import Loading from "../../util/loading/Loading";
 import environmentProperty from "../../util/environmentProperty";
+import VideoCamera from "../../util/camera/ViedoCamera";
 
 
 const firebaseConfig = {
@@ -112,6 +113,8 @@ function NightSaver(props) {
             <button onClick={issueToken}>
                 토큰 발행
             </button>
+
+            <VideoCamera/>
         </>
     )
 }
