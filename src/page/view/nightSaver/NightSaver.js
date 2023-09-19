@@ -23,10 +23,6 @@ function NightSaver(props) {
 
     const [tokenIssueLoading, setTokenIssueLoading] = useState(false);
 
-    useEffect(() => {
-        console.log("tokenIssueLoading 값이 변경되었습니다. : ", tokenIssueLoading);
-    }, [tokenIssueLoading]);
-
     const issueToken = async () => {
 
         try {
