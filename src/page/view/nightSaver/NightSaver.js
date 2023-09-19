@@ -4,7 +4,7 @@ import {getMessaging, getToken} from "firebase/messaging";
 import {initializeApp} from "firebase/app";
 import Loading from "../../util/loading/Loading";
 import environmentProperty from "../../util/environmentProperty";
-import VideoCamera from "../../util/camera/ViedoCamera";
+import VideoCamera from "../../util/camera/PhotoCamera";
 
 
 const firebaseConfig = {
