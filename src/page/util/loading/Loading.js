@@ -3,7 +3,7 @@ import loading from "../../../assets/loading.gif";
 export default function Loading({isLoading}) {
   return (
     <>
-      {isLoading ? <img src={loading} alt="loading" width="40px"/> : null}
+      {isLoading && <img src={loading} alt="loading" width="30px"/>}
     </>
   );
 }
