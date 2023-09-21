@@ -4,7 +4,7 @@ import {getMessaging, getToken} from "firebase/messaging";
 import {initializeApp} from "firebase/app";
 import Loading from "../../util/loading/Loading";
 import environmentProperty from "../../util/environmentProperty";
-import VideoCamera from "../../util/camera/PhotoCamera";
+import PhotoCamera from "../../util/camera/PhotoCamera";
 
 
 const firebaseConfig = {
@@ -114,7 +114,7 @@ function NightSaver(props) {
                 토큰 발행
             </button>
 
-            <VideoCamera/>
+            <PhotoCamera/>
         </>
     )
 }
