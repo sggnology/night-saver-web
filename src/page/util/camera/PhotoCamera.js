@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import Loading from "../loading/Loading";
+import SelectForArray from "../select/SelectForArray";
 
 function PhotoCamera() {
+  const [carNumberGuessLoading, setCarNumberGuessLoading] = useState(false);
+
   const [source, setSource] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [carNumberGuessLoading, setCarNumberGuessLoading] = useState(false);
+
+  const [carNumberGuessStatus, setCarNumberGuessStatus] = useState(false); // [true, false
+  const [carNumberGuessResult, setCarNumberGuessResult] = useState([]);
 
   const handleCapture = (target) => {
     if (target.files) {
@@ -28,17 +33,22 @@ function PhotoCamera() {
     const formData = new FormData();
     formData.append("carNumberImageFile", imageFile);
 
-    try{
+    try {
+      setCarNumberGuessStatus(false);
       setCarNumberGuessLoading(true);
+      setCarNumberGuessResult([]);
 
       axios.post(url, formData, config)
         .then((response) => {
+          setCarNumberGuessStatus(true);
           setCarNumberGuessLoading(false);
-          alert(response);
+          setCarNumberGuessResult(response.data.data.carPlateCandidates);
+          console.log(response);
         });
-    }
-    catch (error){
+    } catch (error) {
+      setCarNumberGuessStatus(true);
       setCarNumberGuessLoading(false);
+      setCarNumberGuessResult([]);
       alert(error);
     }
   }
@@ -56,6 +66,10 @@ function PhotoCamera() {
       />
 
       {source && <button onClick={guessCarNumberImage}>번호 추측</button>}
+      {
+        carNumberGuessResult.length !== 0 ? <SelectForArray options={carNumberGuessResult}/> :
+        carNumberGuessStatus ? <h5>차량 번호판 추측에 실패하였습니다.</h5> : <></>
+      }
 
       <Loading isLoading={carNumberGuessLoading}/>
     </div>
