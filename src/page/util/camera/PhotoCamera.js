@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import Loading from "../loading/Loading";
 
-function VideoCamera() {
+function PhotoCamera() {
   const [source, setSource] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [carNumberGuessLoading, setCarNumberGuessLoading] = useState(false);
 
   const handleCapture = (target) => {
     if (target.files) {
@@ -26,13 +28,19 @@ function VideoCamera() {
     const formData = new FormData();
     formData.append("carNumberImageFile", imageFile);
 
-    axios.post(url, formData, config)
-      .then((response) => {
-        alert(response)
-      })
-      .catch((error) => {
-        alert(error)
-      })
+    try{
+      setCarNumberGuessLoading(true);
+
+      axios.post(url, formData, config)
+        .then((response) => {
+          setCarNumberGuessLoading(false);
+          alert(response);
+        });
+    }
+    catch (error){
+      setCarNumberGuessLoading(false);
+      alert(error);
+    }
   }
 
   return (
@@ -48,8 +56,10 @@ function VideoCamera() {
       />
 
       {source && <button onClick={guessCarNumberImage}>번호 추측</button>}
+
+      <Loading isLoading={carNumberGuessLoading}/>
     </div>
   );
 }
 
-export default VideoCamera;
+export default PhotoCamera;
