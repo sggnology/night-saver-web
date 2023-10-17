@@ -27,7 +27,8 @@ function PhotoCamera() {
     const url = `${process.env.REACT_APP_API_URL}/api/v1/car-number`;
     const config = {
       headers: {
-        'content-type': 'multipart/form-data', // 요청 헤더를 multipart/form-data로 설정
+        'Content-Type': 'multipart/form-data', // 요청 헤더를 multipart/form-data로 설정
+        'Cache-Control': 'no-cache',
       }
     }
     const formData = new FormData();
