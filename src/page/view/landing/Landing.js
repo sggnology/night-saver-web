@@ -1,4 +1,4 @@
-import {Box, Container, Typography} from "@mui/material";
+import {Box, Button, Container, Typography} from "@mui/material";
 
 function Landing() {
   return (
@@ -14,9 +14,27 @@ function Landing() {
         <Typography variant="h2" gutterBottom>
           Night Saver
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" gutterBottom>
           Prevent Danger Of Night Driving
         </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '50px',
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              width: '100px'
+            }}
+
+          >시작하기</Button>
+        </Box>
       </Box>
     </Container>
   )
