@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {Box, Container, Typography} from "@mui/material";
+import {Box, Container, Divider, Stack, Typography} from "@mui/material";
 
 function Header(props) {
   return (
@@ -29,12 +29,11 @@ function Header(props) {
               </Typography>
             </Link>
           </Box>
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-          }}>
+          <Stack
+            direction="row"
+            divider={<Divider orientation="vertical" flexItem />}
+            spacing={2}
+          >
             <Link
               to="/signin"
               style={{
@@ -46,7 +45,6 @@ function Header(props) {
                 SignIn
               </Typography>
             </Link>
-            <div style={{ width: '20px' }}></div>
             <Link
               to="/singup"
               style={{
@@ -58,7 +56,7 @@ function Header(props) {
                 SignUp
               </Typography>
             </Link>
-          </Box>
+          </Stack>
         </Box>
       </Container>
     </>
