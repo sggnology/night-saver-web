@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from "axios";
 import Loading from "../loading/Loading";
 import SelectForArray from "../select/SelectForArray";
+import axiosInstance from "../../../config/api/AxiosInstance";
 
 function PhotoCamera() {
   const [carNumberGuessLoading, setCarNumberGuessLoading] = useState(false);
@@ -24,7 +25,7 @@ function PhotoCamera() {
   };
 
   const guessCarNumberImage = () => {
-    const url = `${process.env.REACT_APP_API_URL}/api/v1/car-number`;
+    const path = `/api/v1/car-number`;
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data', // 요청 헤더를 multipart/form-data로 설정
@@ -39,7 +40,7 @@ function PhotoCamera() {
       setCarNumberGuessLoading(true);
       setCarNumberGuessResult([]);
 
-      axios.post(url, formData, config)
+      axiosInstance.post(path, formData, config)
         .then((response) => {
           setCarNumberGuessStatus(true);
           setCarNumberGuessLoading(false);

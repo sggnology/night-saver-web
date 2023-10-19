@@ -5,6 +5,7 @@ import {initializeApp} from "firebase/app";
 import Loading from "../../util/loading/Loading";
 import environmentProperty from "../../util/environmentProperty";
 import PhotoCamera from "../../util/camera/PhotoCamera";
+import axiosInstance from "../../../config/api/AxiosInstance";
 
 
 const firebaseConfig = {
@@ -85,13 +86,13 @@ function NightSaver(props) {
 
     const saveToken = async (token) => {
 
-        const url = `${environmentProperty.API_URL}/api/v1/token`;
+        const path = `/api/v1/token`;
         const body = {
             token: token
         };
 
         try{
-            await axios.post(url, body);
+            await axiosInstance.post(path, body);
             setTokenIssueLoading(false);
             console.log("토큰을 저장하였습니다.");
             alert("토큰이 발행되어 서비스를 사용하실 수 있습니다.");

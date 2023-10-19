@@ -7,6 +7,7 @@ import {
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import axiosInstance from "../../../config/api/AxiosInstance";
 
 function SignUp() {
 
@@ -43,9 +44,9 @@ function SignUp() {
 
   const requestEmailCertificationCode = () => {
 
-    const url = `${process.env.REACT_APP_API_URL}/api/v1/certification/signup?userEmail=${email}`;
+    const path = `/api/v1/certification/signup?userEmail=${email}`;
 
-    axios.get(url)
+    axiosInstance.get(path)
       .then((response) => {
         if(response.data.code === 200){
           setIsEmailCertificationCodeRequested(true);
@@ -61,13 +62,13 @@ function SignUp() {
   }
 
   const certificateEmailCode = () => {
-    const url = `${process.env.REACT_APP_API_URL}/api/v1/certification/signup`;
+    const path = `/api/v1/certification/signup`;
     const body = {
       userEmail: email,
       certificationCode: emailCertificationCode
     }
 
-    axios.post(url, body)
+    axiosInstance.post(path, body)
       .then((response) => {
         console.log(response);
         if (response.data.code === 200) {
@@ -86,7 +87,7 @@ function SignUp() {
 
     event.preventDefault();
 
-    const url = `${process.env.REACT_APP_API_URL}/api/v1/signup`;
+    const path = `/api/v1/signup`;
     const body = {
       userEmail: email,
       nickName: nickName,
@@ -94,7 +95,7 @@ function SignUp() {
       passwordConfirm: confirmPassword
     }
 
-    axios.post(url, body)
+    axiosInstance.post(path, body)
       .then((response) => {
         if (response.data.code === 200) {
           alert("회원가입이 완료되었습니다.");
