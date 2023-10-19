@@ -10,7 +10,7 @@ function Header(props) {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          width: 'calc(100vw - 40px)',
+          width: '100vw',
           height: '50px',
           backgroundColor: '#6285dc',
           paddingLeft: '20px',
@@ -46,7 +46,7 @@ function Header(props) {
               </Typography>
             </Link>
             <Link
-              to="/singup"
+              to="/signup"
               style={{
                 textDecoration: 'none', // 밑줄 제거
                 color: 'white', // 링크 텍스트 색상 설정
