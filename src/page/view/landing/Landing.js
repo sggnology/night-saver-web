@@ -1,6 +1,22 @@
 import {Box, Button, Container, Typography} from "@mui/material";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 function Landing() {
+
+  const navigate = useNavigate();
+
+  const {authenticated} = useSelector((state) => state.token);
+
+  const handleStartButton = () => {
+    if(authenticated){
+      // TODO 토큰 발행
+    }
+    else{
+      navigate('/signin');
+    }
+  }
+
   return (
     <Container maxWidth={false} disableGutters={true}>
       <Box sx={{
@@ -29,10 +45,10 @@ function Landing() {
         >
           <Button
             variant="contained"
+            onClick={handleStartButton}
             sx={{
               width: '100px'
             }}
-
           >시작하기</Button>
         </Box>
       </Box>
