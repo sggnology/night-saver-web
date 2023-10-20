@@ -7,14 +7,20 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axiosInstance from "../../../config/api/AxiosInstance";
+import {useDispatch, useSelector} from "react-redux";
+import {SET_TOKEN} from "../../../store/Auth";
 
 function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleEmailTextField = (event) => {
     setEmail(event.target.value);
@@ -36,6 +42,8 @@ function SignIn() {
     axiosInstance.post(path, body)
       .then((response) => {
         console.log(response);
+        dispatch(SET_TOKEN(response.data.data));
+        navigate('/', {replace: true});
       })
       .catch((error) => {
         console.log(error.response);
