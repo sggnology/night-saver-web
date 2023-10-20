@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import axios from "axios";
 import Loading from "../loading/Loading";
 import SelectForArray from "../select/SelectForArray";
 import axiosInstance from "../../../config/api/AxiosInstance";

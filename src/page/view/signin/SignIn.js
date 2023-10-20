@@ -8,16 +8,38 @@ import {
   Typography
 } from "@mui/material";
 import {Link} from "react-router-dom";
+import {useState} from "react";
+import axiosInstance from "../../../config/api/AxiosInstance";
 
 function SignIn() {
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailTextField = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const handlePasswordTextField = (event) => {
+    setPassword(event.target.value);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const path = "/api/v1/login";
+    const body = {
+      userEmail: email,
+      password: password
+    }
+
+    axiosInstance.post(path, body)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
 
   return (
@@ -50,6 +72,8 @@ function SignIn() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            value={email}
+            onChange={handleEmailTextField}
             autoFocus
           />
           <TextField
@@ -61,6 +85,8 @@ function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={handlePasswordTextField}
           />
           {/*<FormControlLabel*/}
           {/*  control={<Checkbox value="remember" color="primary"/>}*/}
@@ -74,28 +100,18 @@ function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs={6} display="flex" justifyContent="start">
-              <Link href="#" variant="body2"
-                    style={{
-                      textDecoration: 'none', // 밑줄 제거
-                      color: 'black', // 링크 텍스트 색상 설정
-                    }}
-              >
-                비밀번호 찾기
-              </Link>
-            </Grid>
-            <Grid item xs={6} display="flex" justifyContent="end">
-              <Link href="#" variant="body2"
-                    style={{
-                      textDecoration: 'none', // 밑줄 제거
-                      color: 'black', // 링크 텍스트 색상 설정
-                    }}
-              >
-                회원가입
-              </Link>
-            </Grid>
-          </Grid>
+          {/*<Grid container>*/}
+          {/*  <Grid item xs={6} display="flex" justifyContent="start">*/}
+          {/*    <Link href="#" variant="body2"*/}
+          {/*          style={{*/}
+          {/*            textDecoration: 'none', // 밑줄 제거*/}
+          {/*            color: 'black', // 링크 텍스트 색상 설정*/}
+          {/*          }}*/}
+          {/*    >*/}
+          {/*      비밀번호 찾기*/}
+          {/*    </Link>*/}
+          {/*  </Grid>*/}
+          {/*</Grid>*/}
         </Box>
       </Box>
     </Container>
