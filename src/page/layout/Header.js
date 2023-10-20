@@ -1,7 +1,17 @@
 import {Link} from "react-router-dom";
-import {Box, Container, Divider, Stack, Typography} from "@mui/material";
+import {Box, Button, Container, Divider, Stack, Typography} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {REMOVE_TOKEN} from "../../store/Auth";
 
 function Header(props) {
+
+  const {authenticated} = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+    dispatch(REMOVE_TOKEN());
+  }
+
   return (
     <>
       <Container maxWidth={false} disableGutters={true}>
@@ -34,28 +44,48 @@ function Header(props) {
             divider={<Divider orientation="vertical" flexItem />}
             spacing={2}
           >
-            <Link
-              to="/signin"
-              style={{
-                textDecoration: 'none', // 밑줄 제거
-                color: 'white', // 링크 텍스트 색상 설정
-              }}
-            >
-              <Typography variant="subtitle1">
-                SignIn
-              </Typography>
-            </Link>
-            <Link
-              to="/signup"
-              style={{
-                textDecoration: 'none', // 밑줄 제거
-                color: 'white', // 링크 텍스트 색상 설정
-              }}
-            >
-              <Typography variant="subtitle1">
-                SignUp
-              </Typography>
-            </Link>
+            {
+              authenticated ?
+                  <>
+                    <Button
+                      onClick={handleSignOut}
+                      sx={{
+                        color: 'white',
+                        textTransform: 'none',
+                      }}
+                    >
+                      <Typography variant="subtitle1">
+                        SignOut
+                      </Typography>
+                    </Button>
+                  </>
+                  :
+                <>
+                  <Link
+                    to="/signin"
+                    style={{
+                      textDecoration: 'none', // 밑줄 제거
+                      color: 'white', // 링크 텍스트 색상 설정
+                    }}
+                  >
+                    <Typography variant="subtitle1">
+                      SignIn
+                    </Typography>
+                  </Link>
+                  <Link
+                    to="/signup"
+                    style={{
+                      textDecoration: 'none', // 밑줄 제거
+                      color: 'white', // 링크 텍스트 색상 설정
+                    }}
+                  >
+                    <Typography variant="subtitle1">
+                      SignUp
+                    </Typography>
+                  </Link>
+                </>
+
+            }
           </Stack>
         </Box>
       </Container>
