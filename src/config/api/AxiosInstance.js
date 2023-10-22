@@ -9,6 +9,8 @@ axiosInstance.interceptors.response.use(function(response){
     alert("로그인이 필요합니다.");
     window.location.replace("/signin");
   }
+
+  return response;
 });
 
 export default axiosInstance;
