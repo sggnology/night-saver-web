@@ -1,6 +1,7 @@
-import {Box, Button, Fab, Modal, Stack, TextField, Typography} from "@mui/material";
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import {Box, Button, CircularProgress, Fab, Modal, Stack, TextField, Typography} from "@mui/material";
+import ReportIcon from '@mui/icons-material/Report';
 import React, {useState} from "react";
+import Loading from "../../util/loading/Loading";
 
 
 function AuthenticatedLanding() {
@@ -9,6 +10,8 @@ function AuthenticatedLanding() {
   const [reportTypingModalOpen, setReportTypingModalOpen] = useState(false);
 
   const [carPlateNumber, setCarPlateNumber] = useState('');
+
+  const [reportLoading, setReportLoading] = useState(false);
 
   const handleReportClick = () => {
     setReportModalOpen(true);
@@ -26,9 +29,11 @@ function AuthenticatedLanding() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO : 신고하기
+    setReportLoading(true);
     setTimeout(() => {
       setReportTypingModalOpen(false);
       alert(`차량번호 : ${carPlateNumber} 에 대한 신고가 완료되었습니다.`);
+      setReportLoading(false);
     }, 1000)
   }
 
@@ -43,7 +48,7 @@ function AuthenticatedLanding() {
           right: '2vh',
           bottom: '2vh',
         }}>
-        <DirectionsCarIcon/>
+        <ReportIcon/>
       </Fab>
       <Modal
         open={reportModalOpen}
@@ -102,14 +107,16 @@ function AuthenticatedLanding() {
             name="carPlateNumber"
             value={carPlateNumber}
             onChange={handleCarPlateNumberTextField}
+            disabled={reportLoading}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{mt: 1, mb: 2}}
+            disabled={reportLoading}
           >
-            신고하기
+            {reportLoading ? <Loading isLoading={reportLoading}/> : '신고하기'}
           </Button>
         </Box>
       </Modal>
