@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Loading from "../loading/Loading";
 import SelectForArray from "../select/SelectForArray";
 import axiosInstance from "../../../config/api/AxiosInstance";
+import Loading from "../loading/Loading";
 
 function PhotoCamera() {
   const [carNumberGuessLoading, setCarNumberGuessLoading] = useState(false);

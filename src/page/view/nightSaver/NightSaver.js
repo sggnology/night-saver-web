@@ -2,10 +2,9 @@ import axios from "axios";
 import {useState} from "react";
 import {getMessaging, getToken} from "firebase/messaging";
 import {initializeApp} from "firebase/app";
-import Loading from "../../util/loading/Loading";
-import environmentProperty from "../../util/environmentProperty";
 import PhotoCamera from "../../util/camera/PhotoCamera";
 import axiosInstance from "../../../config/api/AxiosInstance";
+import Loading from "../../util/loading/Loading";
 
 
 const firebaseConfig = {

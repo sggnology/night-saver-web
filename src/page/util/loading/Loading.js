@@ -1,9 +1,22 @@
-import loading from "../../../assets/loading.gif";
+import {Box, CircularProgress} from "@mui/material";
+import React from "react";
 
-export default function Loading({isLoading}) {
+function Loading({isLoading}){
   return (
     <>
-      {isLoading && <img src={loading} alt="loading" width="30px"/>}
+      {isLoading ?
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <CircularProgress size={30} />
+        </Box>
+        :
+        <></>
+      }
     </>
-  );
+  )
 }
+
+export default Loading;
