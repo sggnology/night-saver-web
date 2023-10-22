@@ -2,9 +2,13 @@ import {Box, Button, CircularProgress, Fab, Modal, Stack, TextField, Typography}
 import ReportIcon from '@mui/icons-material/Report';
 import React, {useState} from "react";
 import Loading from "../../util/loading/Loading";
+import axiosInstance from "../../../config/api/AxiosInstance";
+import {useSelector} from "react-redux";
 
 
 function AuthenticatedLanding() {
+
+  const {token} = useSelector((state) => state.token);
 
   const [reportModalOpen, setReportModalOpen] = useState(false);
   const [reportTypingModalOpen, setReportTypingModalOpen] = useState(false);
@@ -28,13 +32,29 @@ function AuthenticatedLanding() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // TODO : 신고하기
     setReportLoading(true);
-    setTimeout(() => {
-      setReportTypingModalOpen(false);
-      alert(`차량번호 : ${carPlateNumber} 에 대한 신고가 완료되었습니다.`);
-      setReportLoading(false);
-    }, 1000)
+
+    const path = `/api/v1/report/car-plate?carPlate=${carPlateNumber}`;
+
+    axiosInstance.get(path, {headers: {Authorization: `${token}1`}})
+      .then((response) => {
+
+        setReportLoading(false);
+
+        if(response.data.code === 200) {
+          alert(`차량번호 : ${carPlateNumber} 에 대한 신고가 완료되었습니다.`);
+        }
+        else if(500 <= response.data.code){
+          alert(response.data.message);
+        }
+      })
+      .catch((error) => {
+
+        setReportLoading(false);
+
+        alert("서버와의 통신에 실패하였습니다.");
+        console.error(error);
+      });
   }
 
   return (
