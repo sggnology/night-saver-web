@@ -8,10 +8,10 @@ import {
   Typography
 } from "@mui/material";
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axiosInstance from "../../../config/api/AxiosInstance";
 import {useDispatch, useSelector} from "react-redux";
-import {SET_TOKEN} from "../../../store/Auth";
+import {REMOVE_TOKEN, SET_TOKEN} from "../../../store/Auth";
 
 function SignIn() {
 
@@ -21,6 +21,10 @@ function SignIn() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(REMOVE_TOKEN());
+  }, []);
 
   const handleEmailTextField = (event) => {
     setEmail(event.target.value);
