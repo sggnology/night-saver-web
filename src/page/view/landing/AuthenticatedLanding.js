@@ -36,13 +36,15 @@ function AuthenticatedLanding() {
 
     const path = `/api/v1/report/car-plate?carPlate=${carPlateNumber}`;
 
-    axiosInstance.get(path, {headers: {Authorization: `${token}1`}})
+    axiosInstance.get(path, {headers: {Authorization: `${token}`}})
       .then((response) => {
 
         setReportLoading(false);
 
         if(response.data.code === 200) {
           alert(`차량번호 : ${carPlateNumber} 에 대한 신고가 완료되었습니다.`);
+          setCarPlateNumber('');
+          setReportTypingModalOpen(false);
         }
         else if(500 <= response.data.code){
           alert(response.data.message);
