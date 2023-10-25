@@ -15,7 +15,7 @@ function SignUp() {
 
   const [email, setEmail] = useState('');
   const [emailCertificationCode, setEmailCertificationCode] = useState('');
-  const [nickName, setNickName] = useState('');
+  const [nickName, setNickName] = useState(null);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -119,7 +119,6 @@ function SignUp() {
     >
       <Box
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
