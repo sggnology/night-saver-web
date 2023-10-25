@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 axiosInstance.defaults.withCredentials = true;
 
 axiosInstance.interceptors.response.use(function(response){
-  if(response.code === 401){
+  if(response.data.code === 401){
     alert("로그인이 필요합니다.");
     window.location.replace("/signin");
   }
