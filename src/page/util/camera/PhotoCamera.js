@@ -43,8 +43,7 @@ function PhotoCamera() {
         .then((response) => {
           setCarNumberGuessStatus(true);
           setCarNumberGuessLoading(false);
-          setCarNumberGuessResult(response.data.data.carPlateCandidates);
-          console.log(response);
+          setCarNumberGuessResult(response.data.carPlateCandidates);
         });
     } catch (error) {
       setCarNumberGuessStatus(true);

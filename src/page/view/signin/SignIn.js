@@ -45,8 +45,7 @@ function SignIn() {
 
     axiosInstance.post(path, body)
       .then((response) => {
-        console.log(response);
-        dispatch(SET_TOKEN(response.data.data));
+        dispatch(SET_TOKEN(response.data));
         navigate('/', {replace: true});
       })
       .catch((error) => {

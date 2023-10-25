@@ -12,7 +12,7 @@ axiosInstance.interceptors.response.use(function(response){
     window.location.replace("/signin");
   }
 
-  return response;
+  return response.data;
 });
 
 export default axiosInstance;
