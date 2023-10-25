@@ -48,11 +48,11 @@ function SignUp() {
 
     axiosInstance.get(path)
       .then((response) => {
-        if(response.data.code === 200){
+        if(response.code === 200){
           setIsEmailCertificationCodeRequested(true);
           console.log("email 인증 코드 전송 완료");
         }
-        else if(400 <= response.data.code){
+        else if(400 <= response.code){
           alert(response.data.message);
         }
       })
@@ -71,7 +71,7 @@ function SignUp() {
     axiosInstance.post(path, body)
       .then((response) => {
         console.log(response);
-        if (response.data.code === 200) {
+        if (response.code === 200) {
           setIsEmailCertificated(true);
           alert("이메일 인증이 완료되었습니다.");
         } else {
@@ -97,7 +97,7 @@ function SignUp() {
 
     axiosInstance.post(path, body)
       .then((response) => {
-        if (response.data.code === 200) {
+        if (response.code === 200) {
           alert("회원가입이 완료되었습니다.");
           navigate('/signin', {replace: true});
         }
