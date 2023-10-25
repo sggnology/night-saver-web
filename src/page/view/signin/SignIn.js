@@ -45,8 +45,13 @@ function SignIn() {
 
     axiosInstance.post(path, body)
       .then((response) => {
-        dispatch(SET_TOKEN(response.data));
-        navigate('/', {replace: true});
+        if(response.code === 200) {
+          dispatch(SET_TOKEN(response.data));
+          navigate('/', {replace: true});
+        }
+        else if(400 <= response.code){
+          alert(response.message);
+        }
       })
       .catch((error) => {
         console.log(error.response);
