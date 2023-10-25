@@ -53,7 +53,7 @@ function SignUp() {
           console.log("email 인증 코드 전송 완료");
         }
         else if(400 <= response.code){
-          alert(response.data.message);
+          alert(response.message);
         }
       })
       .catch((error) => {
