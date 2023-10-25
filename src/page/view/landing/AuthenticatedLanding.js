@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import Loading from "../../util/loading/Loading";
 import axiosInstance from "../../../config/api/AxiosInstance";
 import {useSelector} from "react-redux";
+import RankReport from "../../component/RankReport";
 
 
 function AuthenticatedLanding() {
@@ -14,6 +15,9 @@ function AuthenticatedLanding() {
   const [reportTypingModalOpen, setReportTypingModalOpen] = useState(false);
 
   const [carPlateNumber, setCarPlateNumber] = useState('');
+  const [rankReportReRenderCount, setRankReportReRenderCount] = useState(0);
+  const [timeType, setTimeType] = useState('day');
+  const [timeValue, setTimeValue] = useState(7);
 
   const [reportLoading, setReportLoading] = useState(false);
 
@@ -41,13 +45,14 @@ function AuthenticatedLanding() {
 
         setReportLoading(false);
 
-        if(response.data.code === 200) {
+        if(response.code === 200) {
           alert(`차량번호 : ${carPlateNumber} 에 대한 신고가 완료되었습니다.`);
           setCarPlateNumber('');
           setReportTypingModalOpen(false);
+          setRankReportReRenderCount(rankReportReRenderCount + 1);
         }
-        else if(500 <= response.data.code){
-          alert(response.data.message);
+        else if(500 <= response.code){
+          alert(response.message);
         }
       })
       .catch((error) => {
@@ -61,7 +66,19 @@ function AuthenticatedLanding() {
 
   return (
     <>
-      AuthenticatedLanding
+      <Box
+        sx={{
+          width: '450px',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'start',
+          alignItems: 'center',
+          padding: '20px 0'
+        }}
+      >
+        <RankReport timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
+      </Box>
       <Fab
         color="primary"
         onClick={handleReportClick}
