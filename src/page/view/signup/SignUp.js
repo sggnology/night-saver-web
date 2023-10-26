@@ -53,11 +53,10 @@ function SignUp() {
 
     axiosInstance.get(path)
       .then((response) => {
-        if(response.code === 200){
+        if (response.code === 200) {
           setIsEmailCertificationCodeRequested(true);
           console.log("email 인증 코드 전송 완료");
-        }
-        else if(400 <= response.code){
+        } else if (400 <= response.code) {
           alert(response.message);
         }
       })
