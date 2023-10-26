@@ -16,6 +16,7 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [emailCertificationCode, setEmailCertificationCode] = useState('');
   const [nickName, setNickName] = useState(null);
+  const [carPlateNumber, setCarPlateNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -32,6 +33,10 @@ function SignUp() {
 
   const handleNickNameTextField = (event) => {
     setNickName(event.target.value);
+  }
+
+  const handleCarPlateNumberTextField = (event) => {
+    setCarPlateNumber(event.target.value);
   }
 
   const handlePasswordTextField = (event) => {
@@ -91,6 +96,7 @@ function SignUp() {
     const body = {
       userEmail: email,
       nickName: nickName,
+      carPlateNumber: carPlateNumber,
       password: password,
       passwordConfirm: confirmPassword
     }
@@ -100,6 +106,8 @@ function SignUp() {
         if (response.code === 200) {
           alert("회원가입이 완료되었습니다.");
           navigate('/signin', {replace: true});
+        } else if (400 <= response.code) {
+          alert(response.message)
         }
       })
       .catch((error) => {
@@ -198,6 +206,16 @@ function SignUp() {
             name="nickName"
             value={nickName}
             onChange={handleNickNameTextField}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="carPlateNumber"
+            label="CarPlate Number"
+            id="carPlateNumber"
+            value={carPlateNumber}
+            onChange={handleCarPlateNumberTextField}
           />
           <TextField
             margin="normal"
