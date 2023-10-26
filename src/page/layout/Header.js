@@ -41,25 +41,44 @@ function Header(props) {
           </Box>
           <Stack
             direction="row"
-            divider={<Divider orientation="vertical" flexItem />}
+            divider={<Divider orientation="vertical" flexItem/>}
             spacing={2}
           >
             {
               authenticated ?
-                  <>
-                    <Button
-                      onClick={handleSignOut}
-                      sx={{
-                        color: 'white',
-                        textTransform: 'none',
+                <>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Link
+                      to="/myPage"
+                      style={{
+                        textDecoration: 'none', // 밑줄 제거
+                        color: 'white', // 링크 텍스트 색상 설정
                       }}
                     >
                       <Typography variant="subtitle1">
-                        SignOut
+                        MyPage
                       </Typography>
-                    </Button>
-                  </>
-                  :
+                    </Link>
+                  </Box>
+                  <Button
+                    onClick={handleSignOut}
+                    sx={{
+                      color: 'white',
+                      textTransform: 'none',
+                    }}
+                  >
+                    <Typography variant="subtitle1">
+                      SignOut
+                    </Typography>
+                  </Button>
+                </>
+                :
                 <>
                   <Link
                     to="/signin"
@@ -84,7 +103,6 @@ function Header(props) {
                     </Typography>
                   </Link>
                 </>
-
             }
           </Stack>
         </Box>

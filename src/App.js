@@ -8,6 +8,7 @@ import SignIn from "./page/view/signin/SignIn";
 import Landing from "./page/view/landing/Landing";
 import SignUp from "./page/view/signup/SignUp";
 import {useSelector} from "react-redux";
+import MyPage from "./page/view/mypage/MyPage";
 
 const theme = createTheme({
   typography: {
@@ -37,6 +38,9 @@ function App() {
             path="/signup"
             element={authenticated ? <Navigate to={"/"}/> : <SignUp/>}
           />
+          <Route
+            path="/myPage"
+            element={authenticated ? <MyPage/> : <Navigate to={"/signin"}/>}/>
           {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
           <Route path="*" element={<NotFound/>}></Route>
         </Routes>
