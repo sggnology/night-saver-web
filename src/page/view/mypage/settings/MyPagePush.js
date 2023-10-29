@@ -35,7 +35,12 @@ function MyPagePush() {
     } catch (e) {
       setFcmTokenIssueLoading(false);
       console.error("토큰 발행 과정에서 오류가 발생하였습니다.");
-      alert("토큰 발행을 실패하였습니다. 다시 시도하여주세요.");
+      if(e.message){
+        alert(e.message);
+      }
+      else{
+        alert("알림을 받게끔 하는 과정에서 오류가 발생하였습니다. 잠시후 시도하여주세요.")
+      }
     }
   }
 
@@ -64,7 +69,7 @@ function MyPagePush() {
         return await tokenProcess();
       } catch (e) {
         console.error("토큰을 발급받던 중 오류 발생");
-        throw new Error("토큰 발행 과정에서 오류가 발생하였습니다. 다시 시도하여주세요.");
+        throw new Error("알림을 받기 위한 토큰 발급에 실패하였습니다.");
       }
     }
   }
@@ -96,14 +101,23 @@ function MyPagePush() {
     }
 
     try{
-      await axiosInstance.post(path, body, config);
-      setFcmTokenIssueLoading(false);
-      console.log("토큰을 저장하였습니다.");
-      alert("토큰이 발행되어 서비스를 사용하실 수 있습니다.");
+      axiosInstance.post(path, body, config)
+        .then((response) => {
+            setFcmTokenIssueLoading(false);
+
+            if(response.code === 200){
+              console.log("토큰을 저장하였습니다.");
+              alert("알림을 허용하였습니다. 신고가 들어오면 알려드릴게요 ㅎㅎ");
+            }
+            else if(400 <= response.code){
+              console.log("토큰을 서버에 저장하는 과정에서 오류가 발생하였습니다.");
+              alert("알림 정보를 저장하는 과정에서 오류가 발생하였습니다.");
+            }
+        })
     }
     catch (e){
       console.error("토큰 저장에 실패하였습니다.");
-      throw new Error("토큰 저장에 실패하였습니다.");
+      throw new Error("알림 정보를 저장하는 과정에서 실패하였습니다.");
     }
   }
 
