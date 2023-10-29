@@ -45,13 +45,18 @@ function RankReport({timeType, timeValue, reRenderCount}) {
         rankReportLoading ?
           <Loading isLoading={rankReportLoading}/>
           :
-          rankReport.map((report, index) => {
-            return (
-              <Typography key={index} variant="body" gutterBottom>
-                {page * size + index + 1}위 : {report.carPlateNumber} ({report.count}건)
-              </Typography>
-            );
-          })
+          rankReport.length === 0 ?
+            <Typography variant="body" gutterBottom>
+              신고 내역이 없습니다.
+            </Typography>
+            :
+            rankReport.map((report, index) => {
+              return (
+                <Typography key={index} variant="body" gutterBottom>
+                  {page * size + index + 1}위 : {report.carPlateNumber} ({report.count}건)
+                </Typography>
+              );
+            })
       }
     </>
   );
