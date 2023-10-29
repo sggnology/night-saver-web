@@ -1,9 +1,9 @@
-import {Box, Button, Container, TextField, Typography} from "@mui/material";
+import {Box, Button, Container, Stack, TextField, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import axiosInstance from "../../../config/api/AxiosInstance";
 import {useSelector} from "react-redux";
 
-function MyPage(){
+function MyPage() {
 
   const {token} = useSelector((state) => state.token);
 
@@ -28,11 +28,10 @@ function MyPage(){
 
     axiosInstance.get(path, config)
       .then((response) => {
-        if(response.code === 200){
+        if (response.code === 200) {
           setNickName(response.data.nickName);
           setCarPlateNumber(response.data.carPlateNumber);
-        }
-        else if(400 <= response.code){
+        } else if (400 <= response.code) {
           alert(response.message);
         }
       })
@@ -61,10 +60,9 @@ function MyPage(){
 
     axiosInstance.put(path, body, config)
       .then((response) => {
-        if(response.code === 200){
+        if (response.code === 200) {
           alert("마이페이지 정보를 수정했습니다.");
-        }
-        else if(400 <= response.code){
+        } else if (400 <= response.code) {
           alert(response.message);
         }
       })
@@ -83,46 +81,56 @@ function MyPage(){
                  height: 'calc(100vh - 50px)'
                }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+      <Typography variant="h5" sx={{mb: 4}}>
+        My Page
+      </Typography>
+
+      <Stack
+        spacing={2}
       >
-        <Typography component="h1" variant="h5">
-          My Page
+        <Typography variant="h6" align={"left"}>
+          Info
         </Typography>
-        <Box component="form" onSubmit={handleMyPageInfoSubmit} sx={{mt: 1}}>
-          <TextField
-            margin="normal"
-            fullWidth
-            id="nickName"
-            label="Nickname"
-            name="nickName"
-            value={nickName}
-            onChange={handleNickNameTextField}
-          />
-          <TextField
-            margin="normal"
-            fullWidth
-            required
-            id="carPlateNumber"
-            label="Car Plate Number"
-            name="carPlateNumber"
-            value={carPlateNumber}
-            onChange={handleCarPlateNumberTextField}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{mt: 3, mb: 2}}
-          >
-            마이페이지 정보 수정
-          </Button>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginTop: 0,
+          }}
+        >
+
+          <Box component="form" onSubmit={handleMyPageInfoSubmit}>
+            <TextField
+              margin="normal"
+              fullWidth
+              id="nickName"
+              label="Nickname"
+              name="nickName"
+              value={nickName}
+              onChange={handleNickNameTextField}
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              required
+              id="carPlateNumber"
+              label="Car Plate Number"
+              name="carPlateNumber"
+              value={carPlateNumber}
+              onChange={handleCarPlateNumberTextField}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{mt: 3, mb: 2}}
+            >
+              마이페이지 정보 수정
+            </Button>
+          </Box>
         </Box>
-      </Box>
+      </Stack>
     </Container>
   )
 }
