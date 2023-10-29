@@ -1,4 +1,3 @@
-import axios from "axios";
 import {useState} from "react";
 import {getMessaging, getToken} from "firebase/messaging";
 import {initializeApp} from "firebase/app";
@@ -66,7 +65,6 @@ function NightSaver(props) {
                 throw new Error("토큰 발행 과정에서 오류가 발생하였습니다. 다시 시도하여주세요.");
             }
         }
-
     }
 
     /**
