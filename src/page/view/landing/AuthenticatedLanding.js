@@ -38,7 +38,7 @@ function AuthenticatedLanding() {
     event.preventDefault();
     setReportLoading(true);
 
-    const path = `/api/v1/report/car-plate?carPlate=${carPlateNumber}`;
+    const path = `/api/v1/report/car-plate-number?carPlateNumber=${carPlateNumber}`;
 
     axiosInstance.get(path, {headers: {Authorization: `${token}`}})
       .then((response) => {
