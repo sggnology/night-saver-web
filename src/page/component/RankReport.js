@@ -47,7 +47,7 @@ function RankReport({timeType, timeValue, reRenderCount}) {
           :
           rankReport.map((report, index) => {
             return (
-              <Typography variant="body" gutterBottom>
+              <Typography key={index} variant="body" gutterBottom>
                 {page * size + index + 1}위 : {report.carPlateNumber} ({report.count}건)
               </Typography>
             );
