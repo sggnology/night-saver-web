@@ -11,29 +11,38 @@ const NotAuthenticatedLanding = () => {
 
   return (
     <>
-      <Typography variant="h2" gutterBottom>
-        Night Saver
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        Prevent Danger Of Night Driving
-      </Typography>
       <Box
         sx={{
+          flexGrow: 1,
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          height: '50px',
         }}
       >
-        <Button
-          variant="contained"
-          onClick={handleStartButton}
+        <Typography variant="h2" gutterBottom>
+          Night Saver
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Prevent Danger Of Night Driving
+        </Typography>
+        <Box
           sx={{
-            width: '100px'
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '50px',
           }}
-        >시작하기</Button>
+        >
+          <Button
+            variant="contained"
+            onClick={handleStartButton}
+            sx={{
+              width: '100px'
+            }}
+          >시작하기</Button>
+        </Box>
       </Box>
     </>
   );
