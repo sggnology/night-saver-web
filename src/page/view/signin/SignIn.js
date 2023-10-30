@@ -53,11 +53,10 @@ function SignIn() {
 
         setSignInLoading(false);
 
-        if(response.code === 200) {
+        if (response.code === 200) {
           dispatch(SET_TOKEN(response.data));
           navigate('/', {replace: true});
-        }
-        else if(400 <= response.code){
+        } else if (400 <= response.code) {
           alert(response.message);
         }
       })
@@ -67,21 +66,19 @@ function SignIn() {
   };
 
   return (
-    <Container maxWidth="xs"
-               sx={{
-                 display: 'flex',
-                 flexDirection: 'column',
-                 justifyContent: 'center',
-                 alignItems: 'center',
-                 height: 'calc(100vh - 50px)'
-               }}
+    <Container
+      maxWidth="xs"
+      sx={{
+        display: 'flex',
+        height: 'calc(100vh - 50px)'
+      }}
     >
       <Box
         sx={{
-          marginTop: 8,
+          flexGrow: 1,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Typography component="h1" variant="h5">
