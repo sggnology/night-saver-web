@@ -17,15 +17,14 @@ function MyPage() {
                sx={{
                  display: 'flex',
                  flexDirection: 'column',
-                 alignItems: 'center',
                  height: 'calc(100vh - 50px)'
                }}
     >
       <TabContext value={value}>
-        <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+        <Box sx={{borderColor: 'divider'}}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="My Page" value="1"/>
-            <Tab label="Report Log" value="2"/>
+            {/*<Tab label="Report Log" value="2"/>*/}
           </TabList>
         </Box>
         <TabPanel value="1">
@@ -37,7 +36,7 @@ function MyPage() {
             <MyPageSettings/>
           </Stack>
         </TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
+        {/*<TabPanel value="2">Item Two</TabPanel>*/}
       </TabContext>
     </Container>
   )
