@@ -115,23 +115,23 @@ function SignUp() {
   };
 
   return (
-    <Container maxWidth="xs"
-               sx={{
-                 display: 'flex',
-                 flexDirection: 'column',
-                 justifyContent: 'center',
-                 alignItems: 'center',
-                 height: 'calc(100vh - 50px)'
-               }}
+    <Container
+      maxWidth="xs"
+      disableGutters={true}
+      sx={{
+        display: 'flex',
+        height: 'calc(100vh - 50px)'
+      }}
     >
       <Box
         sx={{
+          flexGrow: 1,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          justifyContent: 'start',
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" sx={{mt: 4}}>
           Sign Up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{mt: 1}}>
@@ -247,6 +247,7 @@ function SignUp() {
           >
             Sign Up
           </Button>
+
         </Box>
       </Box>
     </Container>
