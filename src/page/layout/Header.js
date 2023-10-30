@@ -1,12 +1,35 @@
 import {Link} from "react-router-dom";
-import {Box, Button, Container, Divider, Stack, Typography} from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Divider,
+  Slide,
+  Stack,
+  Toolbar,
+  Typography,
+  useScrollTrigger
+} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {REMOVE_TOKEN} from "../../store/Auth";
 
 function Header(props) {
 
-  const {authenticated} = useSelector((state) => state.token);
   const dispatch = useDispatch();
+
+  const {authenticated} = useSelector((state) => state.token);
+
+  function HideOnScroll(props) {
+    const {children} = props;
+
+    const trigger = useScrollTrigger();
+
+    return (
+      <Slide appear={false} direction="down" in={!trigger}>
+        {children}
+      </Slide>
+    );
+  }
 
   const handleSignOut = () => {
     dispatch(REMOVE_TOKEN());
@@ -14,99 +37,107 @@ function Header(props) {
 
   return (
     <>
-      <Container maxWidth={false} disableGutters={true}>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100vw',
-          height: '50px',
-          backgroundColor: '#6285dc',
-          paddingLeft: '20px',
-          paddingRight: '20px',
-        }}>
-          <Box>
-            <Link
-              to="/"
-              style={{
-                textDecoration: 'none', // 밑줄 제거
-                color: 'white', // 링크 텍스트 색상 설정
-              }}
-            >
-              <Typography variant="subtitle1">
-                Night Saver
-              </Typography>
-            </Link>
-          </Box>
-          <Stack
-            direction="row"
-            divider={<Divider orientation="vertical" flexItem/>}
-            spacing={2}
+      <HideOnScroll {...props}>
+        <AppBar
+          sx={{
+            backgroundColor: '#6285dc',
+            minHeight: '50px',
+          }}
+        >
+          <Toolbar
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              minHeight: '50px !important',
+            }}
           >
-            {
-              authenticated ?
-                <>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
+            <Box>
+              <Link
+                to="/"
+                style={{
+                  textDecoration: 'none', // 밑줄 제거
+                  color: 'white', // 링크 텍스트 색상 설정
+                }}
+              >
+                <Typography variant="subtitle1">
+                  Night Saver
+                </Typography>
+              </Link>
+            </Box>
+            <Stack
+              direction="row"
+              divider={<Divider orientation="vertical" flexItem/>}
+              spacing={2}
+            >
+              {
+                authenticated ?
+                  <>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Link
+                        to="/myPage"
+                        style={{
+                          textDecoration: 'none', // 밑줄 제거
+                          color: 'white', // 링크 텍스트 색상 설정
+                        }}
+                      >
+                        <Typography variant="subtitle1">
+                          MyPage
+                        </Typography>
+                      </Link>
+                    </Box>
+                    <Button
+                      onClick={handleSignOut}
+                      sx={{
+                        color: 'white',
+                        textTransform: 'none',
+                      }}
+                    >
+                      <Typography variant="subtitle1">
+                        SignOut
+                      </Typography>
+                    </Button>
+                  </>
+                  :
+                  <>
                     <Link
-                      to="/myPage"
+                      to="/signin"
                       style={{
                         textDecoration: 'none', // 밑줄 제거
                         color: 'white', // 링크 텍스트 색상 설정
                       }}
                     >
                       <Typography variant="subtitle1">
-                        MyPage
+                        SignIn
                       </Typography>
                     </Link>
-                  </Box>
-                  <Button
-                    onClick={handleSignOut}
-                    sx={{
-                      color: 'white',
-                      textTransform: 'none',
-                    }}
-                  >
-                    <Typography variant="subtitle1">
-                      SignOut
-                    </Typography>
-                  </Button>
-                </>
-                :
-                <>
-                  <Link
-                    to="/signin"
-                    style={{
-                      textDecoration: 'none', // 밑줄 제거
-                      color: 'white', // 링크 텍스트 색상 설정
-                    }}
-                  >
-                    <Typography variant="subtitle1">
-                      SignIn
-                    </Typography>
-                  </Link>
-                  <Link
-                    to="/signup"
-                    style={{
-                      textDecoration: 'none', // 밑줄 제거
-                      color: 'white', // 링크 텍스트 색상 설정
-                    }}
-                  >
-                    <Typography variant="subtitle1">
-                      SignUp
-                    </Typography>
-                  </Link>
-                </>
-            }
-          </Stack>
-        </Box>
-      </Container>
+                    <Link
+                      to="/signup"
+                      style={{
+                        textDecoration: 'none', // 밑줄 제거
+                        color: 'white', // 링크 텍스트 색상 설정
+                      }}
+                    >
+                      <Typography variant="subtitle1">
+                        SignUp
+                      </Typography>
+                    </Link>
+                  </>
+              }
+            </Stack>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+      <Toolbar
+        sx={{
+          minHeight: '50px !important',
+        }}
+      />
     </>
   )
 }
