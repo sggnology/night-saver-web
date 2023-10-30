@@ -59,13 +59,12 @@ function AuthenticatedLanding() {
 
         setReportLoading(false);
 
-        if(response.code === 200) {
+        if (response.code === 200) {
           alert(`차량번호 : ${carPlateNumber} 에 대한 신고가 완료되었습니다.`);
           setCarPlateNumber('');
           setReportTypingModalOpen(false);
           setRankReportReRenderCount(rankReportReRenderCount + 1);
-        }
-        else if(500 <= response.code){
+        } else if (500 <= response.code) {
           alert(response.message);
         }
       })
@@ -86,7 +85,7 @@ function AuthenticatedLanding() {
           flexDirection: 'column',
           justifyContent: 'start',
           alignItems: 'center',
-          padding: '20px 0'
+          margin: '20px 0 0'
         }}
       >
         <RankReport timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
@@ -96,8 +95,8 @@ function AuthenticatedLanding() {
         onClick={handleReportClick}
         sx={{
           position: 'fixed',
-          right: isMobile ? '3vh':'2vh',
-          bottom: isMobile ? '6vh':'2vh',
+          right: isMobile ? '3vh' : '2vh',
+          bottom: isMobile ? '6vh' : '2vh',
         }}>
         <ReportIcon/>
       </Fab>
