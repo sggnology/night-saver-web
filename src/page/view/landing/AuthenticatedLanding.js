@@ -1,4 +1,15 @@
-import {Box, Button, CircularProgress, Fab, Modal, Stack, TextField, Typography} from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Fab,
+  Modal,
+  Stack,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from "@mui/material";
 import ReportIcon from '@mui/icons-material/Report';
 import React, {useState} from "react";
 import Loading from "../../util/loading/Loading";
@@ -20,6 +31,9 @@ function AuthenticatedLanding() {
   const [timeValue, setTimeValue] = useState(7);
 
   const [reportLoading, setReportLoading] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleReportClick = () => {
     setReportModalOpen(true);
@@ -84,8 +98,8 @@ function AuthenticatedLanding() {
         onClick={handleReportClick}
         sx={{
           position: 'fixed',
-          right: '2vh',
-          bottom: '2vh',
+          right: isMobile ? '3vh':'2vh',
+          bottom: isMobile ? '6vh':'2vh',
         }}>
         <ReportIcon/>
       </Fab>
