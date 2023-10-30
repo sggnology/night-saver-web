@@ -12,11 +12,14 @@ import {useEffect, useState} from "react";
 import axiosInstance from "../../../config/api/AxiosInstance";
 import {useDispatch, useSelector} from "react-redux";
 import {REMOVE_TOKEN, SET_TOKEN} from "../../../store/Auth";
+import Loading from "../../util/loading/Loading";
 
 function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [signInLoading, setSignInLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -37,6 +40,8 @@ function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    setSignInLoading(true);
+
     const path = "/api/v1/login";
     const body = {
       userEmail: email,
@@ -45,6 +50,9 @@ function SignIn() {
 
     axiosInstance.post(path, body)
       .then((response) => {
+
+        setSignInLoading(false);
+
         if(response.code === 200) {
           dispatch(SET_TOKEN(response.data));
           navigate('/', {replace: true});
@@ -104,30 +112,15 @@ function SignIn() {
             value={password}
             onChange={handlePasswordTextField}
           />
-          {/*<FormControlLabel*/}
-          {/*  control={<Checkbox value="remember" color="primary"/>}*/}
-          {/*  label="Remember me"*/}
-          {/*/>*/}
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{mt: 3, mb: 2}}
+            disabled={signInLoading}
           >
-            Sign In
+            {signInLoading ? <Loading isLoading={signInLoading}/> : "Sign In"}
           </Button>
-          {/*<Grid container>*/}
-          {/*  <Grid item xs={6} display="flex" justifyContent="start">*/}
-          {/*    <Link href="#" variant="body2"*/}
-          {/*          style={{*/}
-          {/*            textDecoration: 'none', // 밑줄 제거*/}
-          {/*            color: 'black', // 링크 텍스트 색상 설정*/}
-          {/*          }}*/}
-          {/*    >*/}
-          {/*      비밀번호 찾기*/}
-          {/*    </Link>*/}
-          {/*  </Grid>*/}
-          {/*</Grid>*/}
         </Box>
       </Box>
     </Container>
