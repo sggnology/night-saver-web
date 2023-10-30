@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axiosInstance from "../../config/api/AxiosInstance";
-import {Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import Loading from "../util/loading/Loading";
 
 function RankReport({timeType, timeValue, reRenderCount}) {
@@ -38,26 +38,34 @@ function RankReport({timeType, timeValue, reRenderCount}) {
 
   return (
     <>
-      <Typography variant="h5" gutterBottom>
-        최근 {timeValue}{timeType === 'day' ? '일' : '주'} 신고 랭킹
-      </Typography>
-      {
-        rankReportLoading ?
-          <Loading isLoading={rankReportLoading}/>
-          :
-          rankReport.length === 0 ?
-            <Typography variant="body" gutterBottom>
-              신고 내역이 없습니다.
-            </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          margin: '0 0 20px',
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          최근 {timeValue}{timeType === 'day' ? '일' : '주'} 신고 랭킹
+        </Typography>
+        {
+          rankReportLoading ?
+            <Loading isLoading={rankReportLoading}/>
             :
-            rankReport.map((report, index) => {
-              return (
-                <Typography key={index} variant="body" gutterBottom>
-                  {page * size + index + 1}위 : {report.carPlateNumber} ({report.count}건)
-                </Typography>
-              );
-            })
-      }
+            rankReport.length === 0 ?
+              <Typography variant="body" gutterBottom>
+                신고 내역이 없습니다.
+              </Typography>
+              :
+              rankReport.map((report, index) => {
+                return (
+                  <Typography key={index} variant="body" gutterBottom>
+                    {page * size + index + 1}위 : {report.carPlateNumber} ({report.count}건)
+                  </Typography>
+                );
+              })
+        }
+      </Box>
     </>
   );
 }
