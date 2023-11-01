@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  CircularProgress,
+  CircularProgress, Container,
   Fab,
   Modal,
   Stack,
@@ -16,6 +16,7 @@ import Loading from "../../util/loading/Loading";
 import axiosInstance from "../../../config/api/AxiosInstance";
 import {useSelector} from "react-redux";
 import RankReport from "../../component/RankReport";
+import RankRecord from "../../component/RankRecord";
 
 
 function AuthenticatedLanding() {
@@ -79,17 +80,28 @@ function AuthenticatedLanding() {
 
   return (
     <>
-      <Box
+      <Container
+        maxWidth={"sm"}
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'start',
-          alignItems: 'center',
-          margin: '20px 0 0'
+          direction: 'column',
+          justifyContent: 'center',
         }}
       >
-        <RankReport timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
-      </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            alignItems: 'center',
+            margin: '20px 0 0'
+          }}
+        >
+          <RankReport timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
+          <RankRecord reRenderCount={rankReportReRenderCount}/>
+        </Box>
+      </Container>
       <Fab
         color="primary"
         onClick={handleReportClick}
