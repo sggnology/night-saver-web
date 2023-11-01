@@ -40,12 +40,13 @@ function RankReport({timeType, timeValue, reRenderCount}) {
     <>
       <Box
         sx={{
+          width: '100%',
           display: 'flex',
           flexDirection: 'column',
           margin: '0 0 20px',
         }}
       >
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom sx={{textAlign: 'left'}}>
           최근 {timeValue}{timeType === 'day' ? '일' : '주'} 신고 랭킹
         </Typography>
         {
@@ -59,7 +60,7 @@ function RankReport({timeType, timeValue, reRenderCount}) {
               :
               rankReport.map((report, index) => {
                 return (
-                  <Typography key={index} variant="body" gutterBottom>
+                  <Typography key={index} variant="body" gutterBottom sx={{textAlign: 'left'}}>
                     {page * size + index + 1}위 : {report.carPlateNumber} ({report.count}건)
                   </Typography>
                 );
