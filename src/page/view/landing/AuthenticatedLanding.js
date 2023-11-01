@@ -99,7 +99,7 @@ function AuthenticatedLanding() {
           }}
         >
           <RankReport timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
-          <RankRecord reRenderCount={rankReportReRenderCount}/>
+          <RankRecord type={"total"} reRenderCount={rankReportReRenderCount}/>
         </Box>
       </Container>
       <Fab
