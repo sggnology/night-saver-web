@@ -16,7 +16,7 @@ import Loading from "../../util/loading/Loading";
 import axiosInstance from "../../../config/api/AxiosInstance";
 import {useSelector} from "react-redux";
 import RankReport from "../../component/RankReport";
-import RankRecord from "../../component/RankRecord";
+import ReportRecord from "../../component/ReportRecord";
 
 
 function AuthenticatedLanding() {
@@ -99,7 +99,7 @@ function AuthenticatedLanding() {
           }}
         >
           <RankReport timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
-          <RankRecord type={"total"} reRenderCount={rankReportReRenderCount}/>
+          <ReportRecord type={"total"} reRenderCount={rankReportReRenderCount}/>
         </Box>
       </Container>
       <Fab

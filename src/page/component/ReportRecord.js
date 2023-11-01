@@ -5,7 +5,7 @@ import {Box, Card, CardContent, Typography} from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import {useSelector} from "react-redux";
 
-function RankRecord({type, reRenderCount}) {
+function ReportRecord({type, reRenderCount}) {
 
   const {token} = useSelector((state) => state.token);
 
@@ -165,4 +165,4 @@ function RankRecord({type, reRenderCount}) {
   )
 }
 
-export default RankRecord;
+export default ReportRecord;

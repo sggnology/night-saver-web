@@ -3,7 +3,7 @@ import {TabContext, TabList, TabPanel} from "@mui/lab";
 import MyPageInfo from "./info/MyPageInfo";
 import MyPageSettings from "./settings/MyPageSettings";
 import React, {useState} from "react";
-import RankRecord from "../../component/RankRecord";
+import ReportRecord from "../../component/ReportRecord";
 
 function MyPage() {
 
@@ -38,7 +38,7 @@ function MyPage() {
           </Stack>
         </TabPanel>
         <TabPanel value="2">
-          <RankRecord type={"user"} reRenderCount={0}/>
+          <ReportRecord type={"user"} reRenderCount={0}/>
         </TabPanel>
       </TabContext>
     </Container>
