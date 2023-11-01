@@ -3,8 +3,11 @@ import axiosInstance from "../../config/api/AxiosInstance";
 import Loading from "../util/loading/Loading";
 import {Box, Card, CardContent, Typography} from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
+import {useSelector} from "react-redux";
 
-function RankRecord({reRenderCount}) {
+function RankRecord({type, reRenderCount}) {
+
+  const {token} = useSelector((state) => state.token);
 
   const [rankRecords, setRankRecords] = useState([]);
 
@@ -16,11 +19,24 @@ function RankRecord({reRenderCount}) {
   const target = useRef(null);
 
   const getRankRecord = () => {
-    const path = `/api/v1/report/record?page=${page}&size=10`
+    let path;
+
+    if(type === "total"){
+      path = `/api/v1/report/record?page=${page}&size=10`
+    }
+    else {
+      path = `/api/v1/report/record/user?page=${page}&size=10`
+    }
+
+    const config = {
+      headers: {
+        Authorization: `${token}`
+      }
+    }
 
     setRankRecordLoading(true);
 
-    axiosInstance.get(path)
+    axiosInstance.get(path, config)
       .then((response) => {
 
         setRankRecordLoading(false);
@@ -85,6 +101,7 @@ function RankRecord({reRenderCount}) {
         (rankRecord) => {
           return (
             <Card
+              variant={"outlined"}
               sx={{
                 width: '100%',
                 mb: 1
