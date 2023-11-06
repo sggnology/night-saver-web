@@ -70,7 +70,7 @@ function ReportRecord({type, reRenderCount}) {
   }, [reRenderCount]);
 
   useEffect(() => {
-    if (inView && !isLastPage) {
+    if (inView && !isLastPage && !reportRecordLoading) {
       getReportRecord();
     }
   }, [inView]);
