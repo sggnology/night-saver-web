@@ -10,6 +10,7 @@ axiosInstance.interceptors.response.use(function(response){
   if(response.data.code === 401){
     alert("로그인이 필요합니다.");
     window.location.replace("/signin");
+    return;
   }
 
   return response.data;
