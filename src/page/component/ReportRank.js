@@ -3,7 +3,7 @@ import axiosInstance from "../../config/api/AxiosInstance";
 import {Box, Typography} from "@mui/material";
 import Loading from "../util/loading/Loading";
 
-function RankReport({timeType, timeValue, reRenderCount}) {
+function ReportRank({timeType, timeValue, reRenderCount}) {
 
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(5);
@@ -71,4 +71,4 @@ function RankReport({timeType, timeValue, reRenderCount}) {
   );
 }
 
-export default RankReport;
+export default ReportRank;

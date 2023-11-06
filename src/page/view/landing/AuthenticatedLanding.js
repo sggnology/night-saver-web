@@ -15,7 +15,7 @@ import React, {useState} from "react";
 import Loading from "../../util/loading/Loading";
 import axiosInstance from "../../../config/api/AxiosInstance";
 import {useSelector} from "react-redux";
-import RankReport from "../../component/RankReport";
+import ReportRank from "../../component/ReportRank";
 import ReportRecord from "../../component/ReportRecord";
 
 
@@ -98,7 +98,7 @@ function AuthenticatedLanding() {
             margin: '20px 0 0'
           }}
         >
-          <RankReport timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
+          <ReportRank timeType={timeType} timeValue={timeValue} reRenderCount={rankReportReRenderCount}/>
           <ReportRecord type={"total"} reRenderCount={rankReportReRenderCount}/>
         </Box>
       </Container>
