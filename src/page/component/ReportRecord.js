@@ -98,9 +98,10 @@ function ReportRecord({type, reRenderCount}) {
       </Typography>
       :
       rankRecords.map(
-        (rankRecord) => {
+        (rankRecord, index) => {
           return (
             <Card
+              key={index}
               variant={"outlined"}
               sx={{
                 width: '100%',
