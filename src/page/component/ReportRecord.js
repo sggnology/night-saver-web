@@ -4,27 +4,27 @@ import Loading from "../util/loading/Loading";
 import {Box, Card, CardContent, Typography} from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import {useSelector} from "react-redux";
+import {useInView} from "react-intersection-observer";
 
 function ReportRecord({type, reRenderCount}) {
 
   const {token} = useSelector((state) => state.token);
 
-  const [rankRecords, setRankRecords] = useState([]);
+  const [ref, inView] = useInView();
+
+  const [reportRecords, setReportRecords] = useState([]);
 
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
 
-  const [rankRecordLoading, setRankRecordLoading] = useState(false);
+  const [reportRecordLoading, setReportRecordLoading] = useState(false);
 
-  const target = useRef(null);
-
-  const getRankRecord = () => {
+  const getReportRecord = () => {
     let path;
 
-    if(type === "total"){
+    if (type === "total") {
       path = `/api/v1/report/record?page=${page}&size=10`
-    }
-    else {
+    } else {
       path = `/api/v1/report/record/user?page=${page}&size=10`
     }
 
@@ -34,17 +34,20 @@ function ReportRecord({type, reRenderCount}) {
       }
     }
 
-    setRankRecordLoading(true);
+    setReportRecordLoading(true);
 
     axiosInstance.get(path, config)
       .then((response) => {
 
-        setRankRecordLoading(false);
+        setReportRecordLoading(false);
 
         if (response.code === 200) {
-          setRankRecords(
+          setReportRecords(
             prev => [...prev, ...response.data.content]
           );
+
+          setPage(prev => prev + 1);
+
           // 페이징 데이터 마지막 도달 여부
           setIsLastPage(
             response.data.last
@@ -59,46 +62,30 @@ function ReportRecord({type, reRenderCount}) {
       });
   }
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0
-  };
-
-  const triggerPage = () => {
-    setPage(prev => prev + 1);
-  }
-
-  const observer = new IntersectionObserver(triggerPage, observerOptions);
-
   useEffect(() => {
-    observer.observe(target.current);
-  }, []);
-
-  useEffect(() => {
-    if (isLastPage) {
-      observer.unobserve(target.current);
-    } else {
-      getRankRecord();
-    }
-  }, [page]);
-
-  useEffect(() => {
-    setRankRecords(prev => []);
+    setReportRecords(prev => []);
     setIsLastPage(false);
     setPage(prev => 0);
-    setRankRecordLoading(false)
+    setReportRecordLoading(false);
   }, [reRenderCount]);
 
-  const simpleTypographies = (
+  useEffect(() => {
+    if (inView && !isLastPage) {
+      getReportRecord();
+    }
+  }, [inView]);
 
-    rankRecords.length === 0 ?
-      <Typography variant="body" gutterBottom sx={{mt: 3}}>
-        신고 내역이 없습니다.
-      </Typography>
+  const simpleTypographies = (
+    reportRecords.length === 0 ?
+      reportRecordLoading ?
+        <Loading isLoading={reportRecordLoading}/>
+        :
+        <Typography variant="body" gutterBottom sx={{mt: 3}}>
+          신고 내역이 없습니다.
+        </Typography>
       :
-      rankRecords.map(
-        (rankRecord, index) => {
+      reportRecords.map(
+        (reportRecord, index) => {
           return (
             <Card
               key={index}
@@ -114,17 +101,17 @@ function ReportRecord({type, reRenderCount}) {
                       신고 대상
                     </Typography>
                     <Typography variant="h5" component="div">
-                      {rankRecord.carPlateNumber}
+                      {reportRecord.carPlateNumber}
                     </Typography>
                   </Grid>
                   <Grid xs={12} sm={6}>
                     <Typography variant="body2">
-                      신고자 : {rankRecord.reporter}
+                      신고자 : {reportRecord.reporter}
                     </Typography>
                   </Grid>
                   <Grid xs={12} sm={6}>
                     <Typography color="body2">
-                      {rankRecord.reportedAt}
+                      {reportRecord.reportedAt}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -133,8 +120,6 @@ function ReportRecord({type, reRenderCount}) {
           )
         }
       )
-
-
   );
 
   return (
@@ -153,13 +138,14 @@ function ReportRecord({type, reRenderCount}) {
 
         {simpleTypographies}
 
-        <Loading isLoading={rankRecordLoading}/>
+        {(reportRecords.length !== 0 && reportRecordLoading) && <Loading isLoading={reportRecordLoading}/>}
+
         <div
           style={{
             display: isLastPage ? "none" : "block",
             height: "50px"
           }}
-          ref={target}>
+          ref={ref}>
         </div>
       </Box>
     </>
