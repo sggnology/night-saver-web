@@ -93,7 +93,7 @@ function ReportRecord({type, reRenderCount}) {
   const simpleTypographies = (
 
     rankRecords.length === 0 ?
-      <Typography variant="body" gutterBottom>
+      <Typography variant="body" gutterBottom sx={{mt: 3}}>
         신고 내역이 없습니다.
       </Typography>
       :
