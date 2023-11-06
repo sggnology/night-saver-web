@@ -13,7 +13,7 @@ function RankReport({timeType, timeValue, reRenderCount}) {
 
   const getRankReport = () => {
 
-    const path = `/api/v1/rank/report?page=${page}&size=${size}&type=${timeType}&value=${timeValue}`;
+    const path = `/api/v1/report/rank?page=${page}&size=${size}&type=${timeType}&value=${timeValue}`;
 
     axiosInstance.get(path)
       .then((response) => {
