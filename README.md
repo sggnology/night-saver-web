@@ -41,7 +41,6 @@
 
 <div>
   <img src="https://github.com/sggnology/night-saver-web/assets/100742377/5db040c4-3aa4-4235-9b76-e3b595b27593" width="240" height="500"/>
-  <img src="https://github.com/sggnology/night-saver-web/assets/100742377/676b2366-5fdf-4d2d-9c31-9a11c748be1d" width="400" height="150"/>
 </div>
 
 # 참고
