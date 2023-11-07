@@ -117,7 +117,7 @@ function SignUp() {
   return (
     <Container
       maxWidth="xs"
-      disableGutters={true}
+      disableGutters={false}
       sx={{
         display: 'flex',
         height: 'calc(100vh - 50px)'
