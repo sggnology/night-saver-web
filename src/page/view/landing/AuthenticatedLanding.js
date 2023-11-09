@@ -73,8 +73,8 @@ function AuthenticatedLanding() {
 
         setReportLoading(false);
 
-        alert("서버와의 통신에 실패하였습니다.");
         console.error(error);
+        alert("서버와의 통신에 실패하였습니다.");
       });
   }
 

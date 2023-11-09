@@ -19,7 +19,8 @@ function Landing() {
       }}
     >
       {
-        authenticated ? <AuthenticatedLanding/> : <NotAuthenticatedLanding/>
+        // authenticated ? <AuthenticatedLanding/> : <NotAuthenticatedLanding/>
+        <AuthenticatedLanding/>
       }
     </Container>
   )
