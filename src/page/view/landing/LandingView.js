@@ -19,7 +19,7 @@ import ReportRank from "../../component/ReportRank";
 import ReportRecord from "../../component/ReportRecord";
 
 
-function AuthenticatedLanding() {
+function LandingView() {
 
   const {token} = useSelector((state) => state.token);
 
@@ -186,4 +186,4 @@ function AuthenticatedLanding() {
   );
 }
 
-export default AuthenticatedLanding;
+export default LandingView;

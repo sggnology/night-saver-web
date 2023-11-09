@@ -5,10 +5,10 @@ import NotFound from "./page/exception/NotFound";
 import NightSaver from "./page/view/nightSaver/NightSaver";
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import SignIn from "./page/view/signin/SignIn";
-import Landing from "./page/view/landing/Landing";
 import SignUp from "./page/view/signup/SignUp";
 import {useSelector} from "react-redux";
 import MyPage from "./page/view/mypage/MyPage";
+import LandingRoot from "./page/view/landing/LandingRoot";
 
 const theme = createTheme({
   typography: {
@@ -28,7 +28,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Header/>
         <Routes>
-          <Route path="/" element={<Landing/>}></Route>
+          <Route path="/" element={<LandingRoot/>}></Route>
           <Route path="/nightSaver" element={<NightSaver/>}></Route>
           <Route
             path="/signin"

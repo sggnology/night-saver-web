@@ -1,9 +1,8 @@
 import {Box, Button, Container, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
-import AuthenticatedLanding from "./AuthenticatedLanding";
-import NotAuthenticatedLanding from "./NotAuthenticatedLanding";
+import LandingView from "./LandingView";
 
-function Landing() {
+function LandingRoot() {
 
   const {authenticated} = useSelector((state) => state.token);
 
@@ -19,11 +18,10 @@ function Landing() {
       }}
     >
       {
-        // authenticated ? <AuthenticatedLanding/> : <NotAuthenticatedLanding/>
-        <AuthenticatedLanding/>
+        <LandingView/>
       }
     </Container>
   )
 }
 
-export default Landing;
+export default LandingRoot;
