@@ -28,15 +28,9 @@ function ReportRecord({type, reRenderCount}) {
       path = `/api/v1/report/record/user?page=${page}&size=10`
     }
 
-    const config = {
-      headers: {
-        Authorization: `${token}`
-      }
-    }
-
     setReportRecordLoading(true);
 
-    axiosInstance.get(path, config)
+    axiosInstance.get(path)
       .then((response) => {
 
         setReportRecordLoading(false);
