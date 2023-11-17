@@ -21,16 +21,23 @@ function ReportRecord({type, reRenderCount}) {
 
   const getReportRecord = () => {
     let path;
+    let config = {};
 
     if (type === "total") {
       path = `/api/v1/report/record?page=${page}&size=10`
     } else {
       path = `/api/v1/report/record/user?page=${page}&size=10`
+      config = {
+        ...config,
+        headers: {
+          Authorization: `${token}`
+        }
+      }
     }
 
     setReportRecordLoading(true);
 
-    axiosInstance.get(path)
+    axiosInstance.get(path, config)
       .then((response) => {
 
         setReportRecordLoading(false);
