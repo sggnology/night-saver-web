@@ -54,7 +54,8 @@ function SignIn() {
         setSignInLoading(false);
 
         if (response.code === 200) {
-          dispatch(SET_TOKEN(response.data));
+          dispatch(SET_TOKEN(response.data.accessToken));
+          localStorage.setItem("refresh-token", response.data.refreshToken);
           navigate('/', {replace: true});
         } else if (400 <= response.code) {
           alert(response.message);

@@ -6,9 +6,12 @@ import NightSaver from "./page/view/nightSaver/NightSaver";
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import SignIn from "./page/view/signin/SignIn";
 import SignUp from "./page/view/signup/SignUp";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import MyPage from "./page/view/mypage/MyPage";
 import LandingRoot from "./page/view/landing/LandingRoot";
+import {useEffect} from "react";
+import axiosInstance from "./config/api/AxiosInstance";
+import {SET_TOKEN} from "./store/Auth";
 
 const theme = createTheme({
   typography: {
@@ -20,7 +23,31 @@ const theme = createTheme({
 
 function App() {
 
+  const dispatch = useDispatch();
   const {authenticated} = useSelector((state) => state.token);
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refresh-token");
+
+    if (refreshToken !== null) {
+      const path = "/api/v1/reissue/access-token";
+      const body = {
+        refreshToken: refreshToken
+      }
+
+      axiosInstance.post(path, body)
+        .then((response) => {
+          if (response.code === 200) {
+            dispatch(SET_TOKEN(response.data.accessToken));
+            localStorage.setItem("refresh-token", response.data.refreshToken);
+          } else if (400 <= response.code) {
+            alert("로그인이 필요합니다.");
+            localStorage.removeItem("refresh-token");
+            window.location.replace("/signin");
+          }
+        });
+    }
+  }, []);
 
   return (
     <div className="App">

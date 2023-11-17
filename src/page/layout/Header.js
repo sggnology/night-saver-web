@@ -33,6 +33,7 @@ function Header(props) {
 
   const handleSignOut = () => {
     dispatch(REMOVE_TOKEN());
+    localStorage.removeItem("refresh-token");
   }
 
   return (
