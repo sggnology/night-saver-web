@@ -12,6 +12,7 @@ import LandingRoot from "./page/view/landing/LandingRoot";
 import {useEffect} from "react";
 import axiosInstance from "./config/api/AxiosInstance";
 import {SET_TOKEN} from "./store/Auth";
+import axios from "axios";
 
 const theme = createTheme({
   typography: {
@@ -30,12 +31,13 @@ function App() {
     const refreshToken = localStorage.getItem("refresh-token");
 
     if (refreshToken !== null && refreshToken !== undefined && refreshToken !== "") {
-      const path = "/api/v1/reissue/access-token";
+      const url = `${process.env.REACT_APP_API_URL}/api/v1/reissue/access-token`;
       const body = {
         refreshToken: refreshToken
       }
 
-      axiosInstance.post(path, body)
+      // axiosInstance 를 사용하게 되면 interceptor 가 오류를 가로챔으로 axios 를 사용해 처리
+      axios.post(url, body)
         .then((response) => {
           if (response.code === 200) {
             dispatch(SET_TOKEN(response.data.accessToken));
