@@ -26,4 +26,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/night-saver-web:latest
