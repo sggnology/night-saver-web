@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     const refreshToken = localStorage.getItem("refresh-token");
 
-    if (refreshToken !== null) {
+    if (refreshToken !== null && refreshToken !== undefined && refreshToken !== "") {
       const path = "/api/v1/reissue/access-token";
       const body = {
         refreshToken: refreshToken
@@ -46,6 +46,9 @@ function App() {
             window.location.replace("/signin");
           }
         });
+    }
+    else{
+      localStorage.removeItem("refresh-token");
     }
   }, []);
 
