@@ -46,4 +46,5 @@
 # 참고
 
 ## 서버 github
-- [night-saver-server](https://github.com/sggnology/night-saver)
+- 운영종료
+   - ~~night-saver-server~~
